@@ -203,10 +203,19 @@ public class MultivaluePropertyCleanerTest {
     assertThat(trimFieldsAndRemoveEmptyFields("\" a ,,b , c,  ")).isEqualTo("\" a ,,b , c,  ");
   }
 
+  private static final char[] SOME_PRINTABLE_TRIMMABLE_CHARS = {
+    ' ', '\t', '\f', '\t',
+  };
+
+  /**
+   * Result of randomTrimmedChars being used as arguments to JUnit test method thought the DataProvider feature, are
+   * printed to surefire report. Some of those chars breaks the parsing of the surefire report, therefor, we only use
+   * a subset of the trimmable chars.
+   */
   public static String randomTrimmedChars(int length, Random random) {
     char[] chars = new char[length];
     for (int i = 0; i < chars.length; i++) {
-      chars[i] = (char) random.nextInt(' ' + 1);
+      chars[i] = SOME_PRINTABLE_TRIMMABLE_CHARS[random.nextInt(SOME_PRINTABLE_TRIMMABLE_CHARS.length)];
     }
     return new String(chars);
   }
