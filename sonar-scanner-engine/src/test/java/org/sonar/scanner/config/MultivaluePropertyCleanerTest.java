@@ -88,6 +88,7 @@ public class MultivaluePropertyCleanerTest {
   @UseDataProvider("emptyAndtrimmable")
   public void ignoreEmptyFieldsAndTrimFields(String empty, String trimmable) {
     String expected = trimmable.trim();
+    assertThat(empty.trim()).isEmpty();
 
     assertThat(trimFieldsAndRemoveEmptyFields(trimmable)).isEqualTo(expected);
     assertThat(trimFieldsAndRemoveEmptyFields(trimmable + ',' + empty)).isEqualTo(expected);
@@ -204,15 +205,15 @@ public class MultivaluePropertyCleanerTest {
   }
 
   private static final char[] SOME_PRINTABLE_TRIMMABLE_CHARS = {
-    ' ', '\t', '\f', '\t',
+    ' ', '\t', '\n', '\r'
   };
 
   /**
-   * Result of randomTrimmedChars being used as arguments to JUnit test method thought the DataProvider feature, are
-   * printed to surefire report. Some of those chars breaks the parsing of the surefire report, therefor, we only use
-   * a subset of the trimmable chars.
+   * Result of randomTrimmedChars being used as arguments to JUnit test method through the DataProvider feature, they
+   * are printed to surefire report. Some of those chars breaks the parsing of the surefire report during sonar analysis.
+   * Therefor, we only use a subset of the trimmable chars.
    */
-  public static String randomTrimmedChars(int length, Random random) {
+  private static String randomTrimmedChars(int length, Random random) {
     char[] chars = new char[length];
     for (int i = 0; i < chars.length; i++) {
       chars[i] = SOME_PRINTABLE_TRIMMABLE_CHARS[random.nextInt(SOME_PRINTABLE_TRIMMABLE_CHARS.length)];
