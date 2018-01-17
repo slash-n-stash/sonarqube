@@ -101,7 +101,7 @@ export const generateCoveredLinesMetric = (
 export function generateSeries(
   measuresHistory /*: Array<MeasureHistory> */,
   graph /*: string */,
-  metrics /*: Array<Metric> */,
+  metrics /*:  Array<Metric> | {| [string]: Metric |} */,
   displayedMetrics /*: Array<string> */
 ) /*: Array<Serie> */ {
   if (displayedMetrics.length <= 0) {
@@ -114,7 +114,12 @@ export function generateSeries(
         if (measure.metric === 'uncovered_lines' && !isCustomGraph(graph)) {
           return generateCoveredLinesMetric(measure, measuresHistory);
         }
-        const metric = metrics.find(metric => metric.key === measure.metric);
+        let metric;
+        if (Array.isArray(metric)) {
+          metric = metrics.find(metric => metric.key === measure.metric);
+        } else {
+          metric = metrics[measure.metric];
+        }
         return {
           data: measure.history.map(analysis => ({
             x: analysis.date,

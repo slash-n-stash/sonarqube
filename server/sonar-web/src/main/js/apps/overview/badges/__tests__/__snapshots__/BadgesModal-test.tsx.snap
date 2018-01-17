@@ -60,7 +60,7 @@ exports[`should display the modal after click 2`] = `
     >
       overview.badges.measure.description
     </p>
-    <Connect(BadgeParams)
+    <BadgeParams
       className="big-spacer-bottom"
       options={
         Object {
