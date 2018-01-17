@@ -254,7 +254,7 @@ public class IssuesModeTest {
     orchestrator.executeBuild(runner);
     assertThat(getComponent(orchestrator, "sample:src/main/xoo/sample/ClassAdded.xoo")).isNull();
 
-    // Re-add ClassAdded.xoo in local workspace
+    // Re-add ClassAdded.xoo in local temporaryFolder
     runner = configureScannerIssues("shared/xoo-history-v2", null);
     BuildResult result = orchestrator.executeBuild(runner);
 

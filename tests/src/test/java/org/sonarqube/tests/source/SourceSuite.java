@@ -41,6 +41,8 @@ public class SourceSuite {
   public static final Orchestrator ORCHESTRATOR = Orchestrator
     .builderEnv()
     .setServerProperty("sonar.search.javaOpts", "-Xms128m -Xmx128m")
+    .setSonarVersion("7.0-SNAPSHOT")
+    .setOrchestratorProperty("maven.localRepository", "/tooling/maven-repository")
     .setOrchestratorProperty("sonar-scm-git-plugin-version", "1.3.0.869")
     .addPlugin(xooPlugin())
     .addMavenPlugin("org.sonarsource.scm.git", "sonar-scm-git-plugin", "sonar-scm-git-plugin-version")

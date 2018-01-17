@@ -52,7 +52,7 @@ public class SourceLinesDiffFinderTest {
   }
 
   @Test
-  public void shouldFindNothingWhenContentAreIdentical2() {
+  public void withCodeSample() {
 
     List<String> database = new ArrayList<>();
     database.add("package sample;\n");
@@ -77,6 +77,39 @@ public class SourceLinesDiffFinderTest {
     report.add("    private String myMethod() {\n");
     report.add("    }\n");
     report.add("}\n");
+
+    Set<Integer> diff = new SourceLinesDiffFinder(database, report).findNewOrChangedLines();
+
+    assertThat(diff).containsExactlyInAnyOrder(5, 6, 7, 8, 10, 11, 12);
+
+  }
+
+  @Test
+  public void withHashSample() {
+
+    List<String> database = new ArrayList<>();
+    database.add("ab5b7c2a665690e27c843b6626b903fd");
+    database.add("");
+    database.add("85ae3e3528f8b5d047b5a873ec1720a8");
+    database.add("");
+    database.add("d5d98abc7611352085067faf7aa09dd2");
+    database.add("cbb184dd8e05c9709e5dcaedaa0495cf");
+    database.add("cbb184dd8e05c9709e5dcaedaa0495cf");
+
+    List<String> report = new ArrayList<>();
+    report.add("ab5b7c2a665690e27c843b6626b903fd");
+    report.add("");
+    report.add("85ae3e3528f8b5d047b5a873ec1720a8");
+    report.add("");
+    report.add("7e833fcde2dd6fe69d35a9bd85386454");
+    report.add("");
+    report.add("3778499626e706f3343fd47012209d53");
+    report.add("059b2bbe4a2d47622d9637660b5cbd79");
+    report.add("cbb184dd8e05c9709e5dcaedaa0495cf");
+    report.add("");
+    report.add("d5d98abc7611352085067faf7aa09dd2");
+    report.add("cbb184dd8e05c9709e5dcaedaa0495cf");
+    report.add("cbb184dd8e05c9709e5dcaedaa0495cf");
 
     Set<Integer> diff = new SourceLinesDiffFinder(database, report).findNewOrChangedLines();
 

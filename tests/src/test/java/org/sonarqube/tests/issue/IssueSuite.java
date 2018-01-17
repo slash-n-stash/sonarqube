@@ -41,7 +41,6 @@ import static util.ItUtils.xooPlugin;
   IssueFilterExtensionTest.class,
   IssueMeasureTest.class,
   IssuePurgeTest.class,
-  IssueSearchTest.class,
   IssueTrackingTest.class,
   IssueWorkflowTest.class,
   NewIssuesMeasureTest.class,

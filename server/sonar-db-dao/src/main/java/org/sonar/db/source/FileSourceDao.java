@@ -66,7 +66,7 @@ public class FileSourceDao implements Dao {
         }
         return END_OF_LINE_SPLITTER.splitToList(string);
       }
-      return null;
+      return Collections.emptyList();
     } catch (SQLException e) {
       throw new IllegalStateException("Fail to read FILE_SOURCES.LINE_HASHES of file " + fileUuid, e);
     } finally {
