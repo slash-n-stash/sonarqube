@@ -47,6 +47,7 @@ import FiltersHeader from '../../../components/common/FiltersHeader';
 import FacetsList from './FacetsList';
 import { searchQualityProfiles, Profile } from '../../../api/quality-profiles';
 import { scrollToElement } from '../../../helpers/scrolling';
+import BulkChange from './BulkChange';
 
 const PAGE_SIZE = 100;
 
@@ -371,6 +372,14 @@ export default class App extends React.PureComponent<Props, State> {
             <div className="layout-page-header-panel layout-page-main-header">
               <div className="layout-page-header-panel-inner layout-page-main-header-inner">
                 <div className="layout-page-main-inner">
+                  {this.state.paging && (
+                    <BulkChange
+                      activation={this.state.query.activation}
+                      profile={this.state.query.profile}
+                      referencedProfiles={this.state.referencedProfiles}
+                      total={this.state.paging.total}
+                    />
+                  )}
                   <PageActions
                     loading={this.state.loading}
                     onReload={this.handleReload}
